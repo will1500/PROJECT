@@ -1,5 +1,32 @@
 $(function() {
 
+  // constructor functions
+  function ToDo(name, desc) {
+    this.name = name;
+    this.desc = desc;
+  }
+
+  // `ToDo.all` contains our seed data
+  ToDo.all = [
+
+    
+    
+  ];
+
+  ToDo.prototype.save = function() {
+    // store our new todo
+    ToDo.all.push(this);
+    console.log(ToDo.all);
+  };
+
+  ToDo.prototype.render = function() {
+    // append our new todo to the page
+    var $todo = $(toDoTemplate(this));
+    this.index = ToDo.all.indexOf(this);
+    $todo.attr('data-index', this.index);
+    $toDoList.append($todo);
+  };
+
   // form to create new todo
   var $newToDo = $('#new-todo');
 
@@ -9,40 +36,26 @@ $(function() {
   // todo template
   var toDoTemplate = _.template($('#todo-template').html());
 
-  // `toDos` array is our model (holds our data)
-  // contains test (or "seed") data
-  var toDos = [
-   
-  ];
-
-
-
   // append existing todos (from seed data) to `$toDoList`
   // `_.each` is an "iterator" function provided by Underscore.js
-  _.each(toDos, function (todo, index) {
-    var $todo = $(toDoTemplate(todo));
-    $todo.attr('data-index', index);
-    $toDoList.append($todo);
+  _.each(ToDo.all, function (todo, index) {
+    todo.render();
   });
 
   // submit form to create new todo
   $newToDo.on('submit', function(event) {
     event.preventDefault();
 
-    // create new todo object from form data
+    // create new toDo object from form data
     var toDoName = $('#todo-name').val();
     var toDoDesc = $('#todo-desc').val();
-    var toDoData = {name: toDoName, desc: toDoDesc};
+    var toDo = new ToDo(toDoName, toDoDesc);
 
-    // store our new todo
-    toDos.push(toDoData);
-    console.log(toDos);
-    var index = toDos.indexOf(toDoData);
+    // save toDo
+    toDo.save();
 
-    // append our new todo to the page
-    var $todo = $(toDoTemplate(toDoData));
-    $todo.attr('data-index', index);
-    $toDoList.append($todo);
+    // render toDo
+    toDo.render();
 
     // reset the form
     $newToDo[0].reset();
@@ -59,23 +72,18 @@ $(function() {
     var $todo = $(this).closest(".todo");
     var index = $todo.attr('data-index');
 
-    // remove todo from the `toDos` array (model)
-    toDos.splice(index, 1);
-    console.log(toDos);
+    // remove todo from the `ToDo.all` array (model)
+    ToDo.all.splice(index, 1);
+    console.log(ToDo.all);
 
     // remove todo from the DOM (view)
     $todo.remove();
 
-    // reset indexes in DOM to match `toDos` array
+    // reset indexes in DOM to match `ToDo.all` array
     // $.each loops through DOM elements
     $('.todo').each(function(index) {
       $(this).attr('data-index', index);
-      $("#form").submit( function(eventObj){
-    $(this).append('<input type="hidden" name="field_name" value="value" /> ');               
-    return true;
-});
     });
   });
-
 
 });

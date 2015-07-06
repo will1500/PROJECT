@@ -1,54 +1,41 @@
 <!DOCTYPE html>
+<html>
 <head>
- <title>To Do List</title>
- <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- custom styles -->
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <title> My Blog</title>
 </head>
 <body>
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
-        <h1 class="text-center">To Do List</h1>
+        <h1 class="text-center">My Blog</h1>
         <hr>
         <form class="text-center" id="new-todo">
           <div class="form-group">
-            <input class="form-control" id="todo-name" placeholder="Blog away!" autofocus>
+            <input class="form-control" id="todo-name" placeholder="Write Here" autofocus>
           </div>
-
+          <!-- <div class="form-group">
+            <input class="form-control" id="todo-desc" placeholder="Add task details">
+          </div> -->
           <div class="form-group">
-            <input class="form-control" id="todo-desc" placeholder="Add name and date">
+            <input type="submit" class="btn btn-success" value="Submit">
           </div>
-          <div class="form-group">
-            <input type="submit" class="btn btn-success" value="Add blog post">
-          </div>
-          <div class ="text-center" id="input field" placeholder= "here" autofocus>
         </form>
-        <div>
-    
-</div>
-             <hr>
+        <hr>
         <div id="todo-list"></div>
       </div>
     </div>
   </div>
 
-<script type="text/javascript">
-function showMsg(){
-  var userInput = document.getElementById('userInput').value;
-  document.getElementById('userMsg').innerHTML = userInput;
-}
-</script>
-<input type="input" maxlength="40" id="userInput" onkeyup="showMsg()" value="Enter text here..." />
-<p id="userMsg"></p>
-</body>
-<div id="example-one" contenteditable="true">
-<style scoped>
-  #example-one { margin-bottom: 10px; }
-  [contenteditable="true"] { padding: 10px; outline: 2px dashed #CCC; }
-  [contenteditable="true"]:hover { outline: 2px dashed #0090D2; }
-</style>
-<p>Blog Here <code>HTML5</code>.</p>
-</div>
- <!-- jquery -->
+  <!-- jquery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
   <!-- bootstrap js -->
@@ -59,7 +46,6 @@ function showMsg(){
 
   <!-- custom script -->
   <script type="text/javascript" src="script.js"></script>
- 
 
   <!-- underscore template -->
   <script type="text/template" id="todo-template">
@@ -74,3 +60,4 @@ function showMsg(){
   </script>
 
 </body>
+</html>
